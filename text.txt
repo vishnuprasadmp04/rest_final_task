@@ -1,0 +1,34 @@
+Egadgets:-
+
+->User:
+
+1. authentication
+2. Products List
+3. Product Detail View
+4. Add To cart
+5.Cart List View
+6. Remove From Cart
+7. Checkout
+8.Order List
+9.Order Status Tracking
+10. Product Review
+->Admin
+
+1. Add Products
+2. Product Management
+>Models:-
+
+1.User
+2. Product:
+        -title
+        -description
+        -Image
+        -price
+        -category
+3. Cart:
+        -product (FK)
+        -user(FK)
+        -created at
+4.Order:
+        -product (FK)
+        -user(FK)
