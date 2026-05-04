@@ -98,7 +98,7 @@ class CartViewset(ModelViewSet):
     def placeorder(self,request,pk=0):
         user=request.user
         product=self.get_object().product
-        dser=Orderserializer(data=request.data)
+        dser=OrderSerializer(data=request.data)
         if dser.is_valid():
             dser.save(user=user,product=product)
             Cart.objects.get(id=self.get_object().id).delete()
@@ -123,5 +123,10 @@ class OrderViewset(ModelViewSet):
         return Response(data={"msg":"Not Allowed"},status=status.HTTP_406_NOT_ACCEPTABLE)
     def destroy(self, request):
         return Response(data={"msg":"Not Allowed"},status=status.HTTP_406_NOT_ACCEPTABLE)
-    
-    
+    @action(methods=["PATCH"],detail=True)
+    def cancelorder(self,request,pk=0):
+        order=self.get_object()
+        order.status="cancelled"
+        order.save()
+        return Response(data={"msg":"order cancelled"},status=status.HTTP_200_OK)
+    	
